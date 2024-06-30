@@ -22,3 +22,4 @@ crash.*.log
 
 # Ignore transient lock info files created by terraform apply
 .terraform.tfstate.lock.info
+talosconfig
