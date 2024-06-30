@@ -20,6 +20,17 @@ terraform {
       source  = "kbst/kustomization"
       version = "0.9.6"
     }
+    flux = {
+      source = "fluxcd/flux"
+    }
+    github = {
+      source  = "integrations/github"
+      version = ">= 6.1"
+    }
+    tls = {
+      source  = "hashicorp/tls"
+      version = ">= 4.0"
+    }
   }
 }
 
