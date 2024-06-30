@@ -1,0 +1,9 @@
+cluster: 
+    inlineManifests: 
+    - name: ${name}-install
+      contents: |
+%{ for manifest in manifests ~}
+        ---
+        ${manifest}
+%{ endfor ~}
+
