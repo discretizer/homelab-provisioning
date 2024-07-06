@@ -23,3 +23,6 @@ crash.*.log
 .terraform.tfstate.lock.info
 .sopsrc
 talosconfig
+
+# Ignore any temporary decrypted files
+.decrypted*

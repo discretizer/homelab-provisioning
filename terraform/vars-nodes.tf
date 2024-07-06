@@ -6,7 +6,7 @@ variable "node_mac_addresses" {
   description = "A map of IP addresses to MAC addresses for DHCP reservations"
   type = map(string)
   default = {
-    "192.168.1.12" = "08:00:69:a4:c7:f1"	 
+    "192.168.1.12" = "08:00:69:a4:c7:f1"	 # Nice!
     "192.168.1.13" = "08:00:69:be:eb:ff"	 
     "192.168.1.21" = "08:00:69:f0:4f:8e"
     "192.168.1.22" = "08:00:69:3d:22:8d"

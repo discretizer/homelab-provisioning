@@ -1,6 +1,6 @@
 
 variable "talos_data" {
-  description = "Talos os configuration data"
+  description = "Talos OS configuration data"
   type        = object({
     talos_version = string
     k8s_version = string
