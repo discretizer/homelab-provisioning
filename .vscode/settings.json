@@ -1,5 +1,0 @@
-{
-    "python.defaultInterpreterPath": "~/miniconda3/envs/ansible/bin/python",
-    "python.terminal.activateEnvInCurrentTerminal": true,
-    "ansible.python.interpreterPath": "~/miniconda3/envs/ansible/bin/python"
-}
