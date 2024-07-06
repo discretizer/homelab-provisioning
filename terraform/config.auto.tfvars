@@ -5,7 +5,9 @@ network_gateway = "192.168.1.1"
 network_ip_prefix = 24
 
 node_mac_addresses = {
-    "192.168.1.12" = "08:00:69:a4:c7:f1"	 # Nice!
+    # For some reason SGI Inc got the prefix 08:00:69 from the IEEE - NICE!
+    # Not sure if this is a good idea to use it, but it's a lab so who cares
+    "192.168.1.12" = "08:00:69:a4:c7:f1"
     "192.168.1.13" = "08:00:69:be:eb:ff"	 
     "192.168.1.21" = "08:00:69:f0:4f:8e"
     "192.168.1.22" = "08:00:69:3d:22:8d"
