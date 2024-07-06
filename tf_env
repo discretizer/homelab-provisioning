@@ -1,2 +1,3 @@
-#!/bin/bash
-. <(sops -d --output-type=env secrets.enc.env)
+#!/bin/sh
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
+. <(sops -d --output-type=env ${PROJECT_ROOT}/secrets.enc.env)
