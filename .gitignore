@@ -20,3 +20,4 @@ talosconfig
 
 # Ignore any temporary decrypted files
 .decrypted*
+.vscode/*
