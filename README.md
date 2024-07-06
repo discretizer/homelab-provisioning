@@ -5,7 +5,7 @@
 * Uses SOPS to encrypt secrets
 * Uses OpenTofo state encryption for a local state
     - allows the terraform/tofu state to be stored in the repo itself 
-* 
+* Supports NVIDIA drivers on all workers and QEMU guest tools on all nodes 
 
 ## Prerequisites
 
