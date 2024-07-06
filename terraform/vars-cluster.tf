@@ -1,6 +1,6 @@
 
 variable "talos_data" {
-  description = "Talos os configuration data"
+  description = "Talos OS configuration data"
   type        = object({
     talos_version = string
     k8s_version = string
@@ -19,19 +19,17 @@ variable "talos_data" {
 variable "cluster_name" {
   description = "The name of the cluster"
   type        = string
-  default     = "geohomelab-cluster"
+}
+
+variable "cluster_vip" {
+  description = "The cluster VIP"
+  type        = string
 }
 
 variable "cluster_domain" {
   description = "The domain name for the cluster"
   type        = string
   default     = "cluster.local"
-}
-
-variable "cluster_vip" {
-  description = "The cluster VIP"
-  type        = string
-  default     = "192.168.1.50"
 }
 
 variable "cluster_endpoint_port" {
