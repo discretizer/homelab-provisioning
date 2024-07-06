@@ -7,11 +7,11 @@ variable "github_repository" {
 variable "github_token" {
   description = "The github token"
   type        = string
-  default     = ""  
+  default     = ""
 }
 
 variable "github_owner" {
   description = "The github owner"
   type        = string
   default     = ""
-}   
+}

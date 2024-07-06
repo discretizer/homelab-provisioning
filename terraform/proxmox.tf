@@ -3,20 +3,20 @@ data "proxmox_virtual_environment_nodes" "available_nodes" {}
 locals {
   proxmox_nodes = data.proxmox_virtual_environment_nodes.available_nodes.names
   proxmox_vms = merge({ for k, v in var.node_data.controlplanes : k=>merge(v, {
-      description = "Control Plane Node", 
-      tags = ["k8s", "controlplane", "development"], 
+      description = "Control Plane Node",
+      tags = ["k8s", "controlplane", "development"],
       image_file_id = resource.proxmox_virtual_environment_download_file.talos_controlplane_image_download["${v.vm_host}-controlplane"].id
-    })}, 
+    })},
     { for k, v in var.node_data.workers : k=>merge(v,{
-      description = "Worker Node", 
-      tags = ["k8s", "worker", "development"], 
+      description = "Worker Node",
+      tags = ["k8s", "worker", "development"],
       image_file_id = resource.proxmox_virtual_environment_download_file.talos_worker_image_download["${v.vm_host}-worker"].id
     })
   })
 }
 
 resource "proxmox_virtual_environment_download_file" "talos_worker_image_download" {
-  for_each = toset( formatlist("%s-worker", local.proxmox_nodes)) 
+  for_each = toset( formatlist("%s-worker", local.proxmox_nodes))
 
   provider     = proxmox
   node_name    = split("-", each.key)[0]
@@ -28,7 +28,7 @@ resource "proxmox_virtual_environment_download_file" "talos_worker_image_downloa
 }
 
 resource "proxmox_virtual_environment_download_file" "talos_controlplane_image_download" {
-  for_each = toset( formatlist("%s-controlplane", local.proxmox_nodes)) 
+  for_each = toset( formatlist("%s-controlplane", local.proxmox_nodes))
 
   provider     = proxmox
   node_name    = split("-", each.key)[0]
@@ -42,7 +42,7 @@ resource "proxmox_virtual_environment_download_file" "talos_controlplane_image_d
 
 resource "proxmox_virtual_environment_vm" "vms" {
   for_each = local.proxmox_vms
-  
+
   provider  = proxmox
   node_name = each.value.vm_host
 
@@ -111,9 +111,9 @@ resource "proxmox_virtual_environment_vm" "vms" {
   lifecycle {
     ignore_changes = [
       disk,
-      hostpci, 
-      kvm_arguments, 
-      cpu, 
+      hostpci,
+      kvm_arguments,
+      cpu,
       memory
     ]
   }

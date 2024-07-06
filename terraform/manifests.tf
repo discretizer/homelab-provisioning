@@ -25,18 +25,18 @@ data "kustomization_build" "cilium" {
     }
 }
 
-resource "talos_machine_configuration_apply" "cilium_apply" {  
+resource "talos_machine_configuration_apply" "cilium_apply" {
   for_each = var.node_data.controlplanes
 
   client_configuration        = talos_machine_secrets.secrets.client_configuration
   machine_configuration_input = talos_machine_configuration_apply.control_plane[each.key].machine_configuration
-  
+
   node = each.key
   config_patches = sensitive([
     templatefile("${path.module}/talos-patches/inline-manifests.yaml.tftpl", {
       name = "cilium"
-      manifests = flatten([ 
-          [ for id in data.kustomization_build.cilium.ids_prio[0]: data.kustomization_build.cilium.manifests[id]], 
+      manifests = flatten([
+          [ for id in data.kustomization_build.cilium.ids_prio[0]: data.kustomization_build.cilium.manifests[id]],
           [ for id in data.kustomization_build.cilium.ids_prio[1]: data.kustomization_build.cilium.manifests[id]],
           [ for id in data.kustomization_build.cilium.ids_prio[2]: data.kustomization_build.cilium.manifests[id]]
       ])

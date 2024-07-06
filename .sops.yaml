@@ -1,0 +1,6 @@
+creation_rules:
+    # upon creation of a file under development,
+    # KMS set A is used
+    - path_regex: .*\.auto\.tfvars\.json$
+      age: >-
+        age14ecr3sw0gnx5p2r29tp9zc6wkv6j3vqn0fr9z7m3lmj2za6rc39qsp4ell

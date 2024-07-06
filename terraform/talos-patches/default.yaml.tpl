@@ -68,4 +68,3 @@ cluster:
 #    enabled: true
 #    manifests:
 #      - https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/main/docs/deploy/cloud-controller-manager.yml
-

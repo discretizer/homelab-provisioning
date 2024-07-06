@@ -31,14 +31,14 @@ variable "cluster_domain" {
 variable "cluster_vip" {
   description = "The cluster VIP"
   type        = string
-  default     = "192.168.1.50" 
+  default     = "192.168.1.50"
 }
 
 variable "cluster_endpoint_port" {
   description = "The port for the cluster endpoint"
   type        = number
   default     = 6443
-}  
+}
 
 variable "cluster_endpoint" {
   description = "The cluster endpoint"
