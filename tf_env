@@ -1,0 +1,2 @@
+#!/bin/bash
+. <(sops -d --output-type=env secrets.enc.env)

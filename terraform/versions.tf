@@ -41,13 +41,13 @@ provider "http" {}
 provider "external" {}
 
 provider "proxmox" {
-  endpoint = var.proxmox.endpoint
-  insecure = var.proxmox.insecure
+  endpoint = var.proxmox_endpoint
+  insecure = var.proxmox_insecure
 
-  api_token = var.proxmox.api_token
+  api_token = var.proxmox_api_token
   ssh {
     agent    = true
-    username = var.proxmox.username
+    username = var.proxmox_username
   }
 
   tmp_dir = "/var/tmp"

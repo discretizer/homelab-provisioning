@@ -8,6 +8,7 @@ repos:
     -   id: end-of-file-fixer
     -   id: check-yaml
     -   id: check-added-large-files
+#enforce sops encryption
 -   repo: https://github.com/yuvipanda/pre-commit-hook-ensure-sops
     rev: v1.0
     hooks:

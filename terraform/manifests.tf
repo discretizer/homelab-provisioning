@@ -10,9 +10,6 @@ resource "local_file" "cilium_kustomization" {
   })
 }
 
-data "external" "get_helm_path" {
-  program    = ["/bin/sh","${path.module}/find_helm.sh"]
-}
 
 data "kustomization_build" "cilium" {
     depends_on = [local_file.cilium_kustomization]
