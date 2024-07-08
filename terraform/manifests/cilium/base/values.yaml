@@ -26,6 +26,9 @@ securityContext:
 ipam:
   mode: kubernetes
 
+bgpControlPlane:
+  enabled: true
+
 kubeProxyReplacement: true
 
 operator:

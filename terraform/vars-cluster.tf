@@ -10,7 +10,7 @@ variable "talos_data" {
   default = {
     talos_version = "1.7.5"
     k8s_version = "1.30.1"
-    cilium_version = "1.14.5"
+    cilium_version = "1.15.6"
     secure_boot = true
   }
 }

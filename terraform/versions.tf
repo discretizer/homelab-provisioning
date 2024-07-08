@@ -16,10 +16,6 @@ terraform {
       source  = "hashicorp/external"
       version = "2.3.3"
     }
-    kustomization = {
-      source  = "kbst/kustomization"
-      version = "0.9.6"
-    }
     flux = {
       source = "fluxcd/flux"
     }
@@ -30,6 +26,10 @@ terraform {
     tls = {
       source  = "hashicorp/tls"
       version = ">= 4.0"
+    }
+    sops = {
+      source = "carlpett/sops"
+      version = "1.0.0"
     }
   }
 }
