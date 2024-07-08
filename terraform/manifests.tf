@@ -1,5 +1,4 @@
-provider "kustomization" {
-  kubeconfig_raw = data.talos_cluster_kubeconfig.kubeconfig.kubeconfig_raw
+provider "sops" {
 }
 
 # kustomize cilium manifests
@@ -10,17 +9,25 @@ resource "local_file" "cilium_kustomization" {
   })
 }
 
+resource "null_resource" "cilium_manifest" {
+  triggers = {
+    cilium_version = var.talos_data.cilium_version
+    cilium_base_kustomization = local_file.cilium_kustomization.content_md5
+    cilium_base_values = filemd5("${path.module}/manifests/cilium/base/values.yaml")
+    cilium_scheduling = filemd5("${path.module}/manifests/cilium/high-priority-scheduling.yaml")
+    cilium_kustomization = filemd5("${path.module}/manifests/cilium/kustomization.yaml")
+  }
 
-data "kustomization_build" "cilium" {
-    depends_on = [local_file.cilium_kustomization]
-    path = "${path.module}/manifests/cilium"
-
-    kustomize_options {
-        load_restrictor = "none"
-        enable_helm = true
-        helm_path = "helm"
-    }
+  provisioner "local-exec" {
+    command = "kubectl kustomize --enable-helm ${path.module}/manifests/cilium | sops -e /dev/stdin > ${path.module}/manifests/cilium-manifests.yaml"
+  }
 }
+
+data "sops_file" "cilium_manifest_encrypted" {
+  depends_on = [ null_resource.cilium_manifest ]
+  source_file = "${path.module}/manifests/cilium-manifests.yaml"
+}
+
 
 resource "talos_machine_configuration_apply" "cilium_apply" {
   for_each = var.node_data.controlplanes
@@ -32,11 +39,7 @@ resource "talos_machine_configuration_apply" "cilium_apply" {
   config_patches = sensitive([
     templatefile("${path.module}/talos-patches/inline-manifests.yaml.tftpl", {
       name = "cilium"
-      manifests = flatten([
-          [ for id in data.kustomization_build.cilium.ids_prio[0]: data.kustomization_build.cilium.manifests[id]],
-          [ for id in data.kustomization_build.cilium.ids_prio[1]: data.kustomization_build.cilium.manifests[id]],
-          [ for id in data.kustomization_build.cilium.ids_prio[2]: data.kustomization_build.cilium.manifests[id]]
-      ])
+      manifests = data.sops_file.cilium_manifest_encrypted.raw
     })
   ])
 }

@@ -33,7 +33,7 @@ export TF_VAR_proxmox_api_token="<PROXMOX API TOKEN>"
 export TF_VAR_proxmox_endpoint="<PROXMOX ENDPOINT>"
 export TF_ENCRYPTION='key_provider "pbkdf2" "passphrase_provider" { passphrase ="<RANDOM PASSPHRASE>"}'
 ```
-* Add your [age](https://github.com/FiloSottile/age) key (or any other SOPS supported key) in the (.sops.yaml)[.sops.yaml]
+* Add your [age](https://github.com/FiloSottile/age) key (or any other SOPS supported key) in the [.sops.yaml](.sops.yaml)
 * Encrypt your secrets: `sops -e -i secrets.enc.env`
 * Source your secrets in your environment and run tofu
 ```
