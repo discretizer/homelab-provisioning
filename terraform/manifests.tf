@@ -19,7 +19,7 @@ resource "null_resource" "cilium_manifest" {
   }
 
   provisioner "local-exec" {
-    command = "kubectl kustomize --enable-helm ${path.module}/manifests/cilium | sops -e /dev/stdin > ${path.module}/manifests/cilium-manifests.yaml"
+    command = "kubectl kustomize --enable-helm ${path.module}/manifests/cilium | sops -e --input-type yaml --output-type yaml /dev/stdin > ${path.module}/manifests/cilium-manifests.yaml"
   }
 }
 
