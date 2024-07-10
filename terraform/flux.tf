@@ -20,12 +20,9 @@ provider "github" {
   token = var.github_token
 }
 
-
-resource "github_repository" "this" {
+data "github_repository" "this" {
   name        = var.github_repository
   description = var.github_repository
-  visibility  = "private"
-  auto_init   = true # This is extremely important as flux_bootstrap_git will not work without a repository that has been initialised
 }
 
 resource "tls_private_key" "flux" {
@@ -35,14 +32,28 @@ resource "tls_private_key" "flux" {
 
 resource "github_repository_deploy_key" "this" {
   title      = "Flux"
-  repository = github_repository.this.name
+  repository = data.github_repository.this.name
   key        = tls_private_key.flux.public_key_openssh
   read_only  = "false"
 }
 
-resource "flux_bootstrap_git" "this" {
-  depends_on = [github_repository.this]
+resource "null_resource" "sops_age_secret" {
+  depends_on = [ null_resource.kubeconfig ]
+  
+  triggers = {
+    flux_sops_age_secret_key = var.flux_sops_age_secret_key
+  }
 
+  provisioner "local-exec" {
+    environment = {
+      "FLUX_SOPS_AGE_SECRET_KEY" = var.flux_sops_age_secret_key
+    }
+    command = "echo $FLUX_SOPS_AGE_SECRET_KEY | kubectl create secret generic sops-age --namespace=flux-system --from-file=age.agekey=/dev/stdin --dry-run -o yaml | kubectl apply -f -"
+  }
+}
+
+resource "flux_bootstrap_git" "this" {
+  depends_on = [ null_resource.sops_age_secret ]
   embedded_manifests = true
   path               = "bootstrap"
 }

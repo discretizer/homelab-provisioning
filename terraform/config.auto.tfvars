@@ -44,25 +44,25 @@ node_data = {
     }
     workers = {
       "192.168.1.13" = {
-        cores = 8
+        cores = 16
         memory = 16384
-        disk_size = 500 # 500GB
+        disk_size = 750 # 500GB
         vm_host = "pve1" 
         install_disk = "/dev/sda"
         hostname     = "k8s-worker-1"
       },
       "192.168.1.22" = {
-        cores = 8
+        cores = 16
         memory = 16384 
-        disk_size = 500 # 500GB
+        disk_size = 750 # 500GB
         vm_host = "pve2"
         install_disk = "/dev/sda"
         hostname     = "k8s-worker-2"
       }
       "192.168.1.32" = {
-        cores = 8 
+        cores = 16
         memory = 16384
-        disk_size = 500 # 500GB
+        disk_size = 750 # 500GB
         vm_host = "pve3"
         install_disk = "/dev/sda"
         hostname     = "k8s-worker-3"
