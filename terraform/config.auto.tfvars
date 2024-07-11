@@ -50,6 +50,11 @@ node_data = {
         vm_host = "pve1" 
         install_disk = "/dev/sda"
         hostname     = "k8s-worker-1"
+        node_labels  = {
+          "node-role" = "worker",
+          "accelerator-type" = "nvidia",
+          "accelerator" = "nvidia-tesla-p40"
+        }
       },
       "192.168.1.22" = {
         cores = 16
@@ -58,6 +63,11 @@ node_data = {
         vm_host = "pve2"
         install_disk = "/dev/sda"
         hostname     = "k8s-worker-2"
+        node_labels  = {
+          "node-role" = "worker",
+          "accelerator-type" = "nvidia",
+          "accelerator" = "nvidia-rtx-2080ti"
+        }
       }
       "192.168.1.32" = {
         cores = 16
@@ -66,6 +76,11 @@ node_data = {
         vm_host = "pve3"
         install_disk = "/dev/sda"
         hostname     = "k8s-worker-3"
+        node_labels  = {
+          "node-role" = "worker",
+          "accelerator-type" = "nvidia",
+          "accelerator" = "nvidia-tesla-p4"
+        }
       }
     }
 }
