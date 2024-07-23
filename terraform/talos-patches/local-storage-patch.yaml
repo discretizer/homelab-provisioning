@@ -1,18 +1,25 @@
 machine:
   kubelet:
     extraMounts:
-      - destination: /var/openebs/local
-        type: bind
-        source: /var/openebs/local
-        options:
-          - bind
-          - rshared
-          - rw
-      - destination: /var/openebs/database
-        type: bind
-        source: /var/openebs/database
-        options:
-          - bind
-          - rshared
-          - rw
-      
+    - destination: /var/openebs/local
+      type: bind
+      source: /var/openebs/local
+      options:
+      - bind
+      - rshared
+      - rw
+    - destination: /var/openebs/database
+      type: bind
+      source: /var/openebs/database
+      options:
+      - bind
+      - rshared
+      - rw
+    # Needed for OpenEBS ectd-localpv and loki-localpv storage classes
+    - destination: /var/local/openebs
+      type: bind
+      source: /var/local/openebs
+      options:
+      - bind
+      - rshared
+      - rw
