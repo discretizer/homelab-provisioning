@@ -91,7 +91,8 @@ data "talos_machine_configuration" "worker_node" {
     templatefile("${path.module}/talos-patches/default.yaml.tpl", local.talos_worker_options),
     file("${path.module}/talos-patches/gpu-worker-patch.yaml"),
     file("${path.module}/talos-patches/mayastor-patch.yaml"),
-    file("${path.module}/talos-patches/local-storage-patch.yaml"),
+    file("${path.module}/talos-patches/local-storage-patch.yaml"), 
+    file("${path.module}/talos-patches/nvidia-default-runtimeclass.yaml"),
   ]
 }
 
